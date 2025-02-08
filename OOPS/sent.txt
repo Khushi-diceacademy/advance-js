@@ -1,0 +1,122 @@
+Encapsulation ka matlab hota hai data aur methods ko ek single unit (class) mein bundle karna aur unhe outside interference se protect karna. Yeh concept ensure karta hai ki object ke internal state ko sirf authorized methods ke through access kiya ja sake.
+
+Encapsulation means hiding the details of how something works and only exposing what’s necessary. It helps keep code clean, organized, and safe from unintended changes.
+
+Imagine a coffee machine. You press a button to get coffee, but you don’t need to know how the machine works inside (heating water, mixing coffee, etc.). The machine hides its internal processes (encapsulation) and only gives you coffee when you interact with it using its buttons.
+
+
+
+questions ->
+Battery level-> make a MobilePhone class then make a constructor ask for brand and model and a private field as _batteryLevel = 100
+make a method named as usePhone() check if the hours are greater than 0 and the batterylevel is greater than 0 then calculate the battery assume 10% battery per hour and print model brand and hours used and battery left
+
+test case -
+else
+  print ->   console.log('Invalid usage or battery drained.');
+make another private method _batterystatus where you will print the battery level 
+
+
+expected output ->
+Samsung Galaxy S21 used for 5.8 hours
+Battery level is 42%
+
+
+
+class MobilePhone {
+  constructor(brand, model) {
+    this.brand = brand;
+    this.model = model;
+    this._batteryLevel = 100; // Private field conventionally
+  }
+    usePhone(hours) {
+    if (hours > 0 && this._batteryLevel > 0) {
+      this._batteryLevel -= hours * 10; // Assume 10% battery per hour
+      console.log(`${this.brand} ${this.model} used for ${hours} hours`);
+    } else {
+      console.log('Invalid usage or battery drained.');
+    }
+    this._batteryStatus()
+  }
+  // Private method conventionally to show encapsulation
+  _batteryStatus() {
+    console.log(`Battery level is ${this._batteryLevel}%`);
+  }
+}
+const myPhone = new MobilePhone('Samsung', 'Galaxy S21');
+myPhone.usePhone(5.8); 
+
+
+----------------------------
+
+
+
+Real-Life Example: A Coffee Machine
+Imagine a coffee machine. You press a button to get coffee, but you don’t need to know how the machine works inside (heating water, mixing coffee, etc.). The machine hides its internal processes (encapsulation) and only gives you coffee when you interact with it using its buttons
+
+
+
+
+
+Factory functions
+
+
+Factory functions ek aisi function hoti hai jo nayi objects create karti hai. Ye functions object ko create karne ke liye "constructor function" ka alternative hoti hain. Factory functions ka use karna asaan hota hai aur ye code ko clean aur modular banati hain.
+constructor functions
+
+Maan lo ki humein ek car manufacturing company chalani hai aur humein alag-alag types ki cars banani hain. Har car ka kuch properties (jaise color, brand, model) aur methods (jaise drive, stop) honge.
+BOM
+Code Optimization: Best Practices for Writing Efficient Code
+
+
+
+
+
+const user1 = {
+  firstname: "khushi",
+  lastnamer: 'gupta',
+  age: 23,
+  getAgeYear: function () {
+    return "heyyyy"
+  }
+}
+
+function createUser(name, surname, age) {
+  const user = {
+    name,
+    surname,
+    age,
+    start() {
+      return (`${this.name} ${this.surname}  and age is ${this.age}`);
+    },
+
+  }
+
+  return user;
+}
+
+var user1 = createUser("khushi","gupta",67)
+var user2 = createUser("ram","mishra",37)
+
+
+// console.log(user1);
+// console.log(user2);
+console.log(user3.start())
+console.log(user2.start())
+// in this program this is prove that user1 and user2 both have same function but taking the function as different memory allocation
+
+
+Reusability: Factory functions ek hi tarike se multiple objects create karne mein madad karti hain.
+Simplification: Ye code ko simple aur maintainable banati hain.
+No new Keyword: Factory functions mein new keyword use karne ki zarurat nahi hoti, jo ki syntax ko easy aur readable banata hai.
+
+
+limmitations-> taking alot memories
+
+
+--------------------------------------
+
+
+IIFE stands for Immediately Invoked Function Expression.
+
+It’s a JavaScript function that runs as soon as it is defined.
+You don’t need to call it explicitly; it calls itself.

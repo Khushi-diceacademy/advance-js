@@ -1,0 +1,315 @@
+Currying ek technique hai jisme ek function ko multiple arguments lene ke bajaye, ek hi argument lete hue multiple functions ka chain banata hai. Iska fayda yeh hota hai ki aap specific arguments ko pehle se set kar sakte ho aur baad mein function ko call kar sakte ho baaki arguments ke sath.
+
+normal function
+
+function abc(a,b,c){
+  return a+b+c
+}
+console.log(abc(10,20,30))
+
+// let us we only want to add when all the parameters are avaiable 
+
+
+
+function add(a){
+  return function(b){
+    return function(c){
+      return a+b+c;
+    }
+  }
+}
+console.log(add(2)(3)(4))
+
+// it will not execute any function until all parameters not avaiable if the parameters , arguments are not there it will pass the function anonymous
+
+
+// real life example to address, subject , content 
+function autoEmail(toAddress) {
+  return function (subject) {
+    return function (content) {
+      console.log(`Sending Email to ${toAddress} with the subject ${subject} : ${content}`)
+    }
+  }
+}
+let step1 = autoEmail("kg830574@gmail.com");
+let step2 = step1('Return the order')
+step2('hey khushi! Your Request for returning the order is confirmed Please Verify this message')
+
+
+
+
+------using ES6
+
+
+const sendEmail = to => subject => content =>
+  `Sending Email to ${to} with the subject ${subject} : ${content}`
+
+
+let step1 = sendEmail("kg830574@gmail.com");
+let step2 = step1('Return the order')
+let finalMessage = step2('hey khushi! Your Request for returning the order is confirmed Please Verify this message');
+console.log(finalMessage)
+Create a curried function to calculate the final price of a product including tax and discount. 
+
+(take taxRate,discount and Price)
+
+
+
+
+function calculatethePrice(taxRate) {
+  return function (discount) {
+    return function (price) {
+      let finalPrice = price + (price * taxRate) - (price * discount);
+      console.log(`the tax is ${taxRate * 100}% and the discount included on the item is ${discount * 100}% and the final price is ${finalPrice.toFixed(2)} rs`)
+    }
+  }
+}
+
+let Withtax = calculatethePrice(0.15);
+let withDiscount = Withtax(0.10);
+console.log(withDiscount(100))
+
+
+-------------------------- do it with 
+make roles and resource 
+
+function checkPermission(role) {
+  return function(resource) {
+    let permissions = {
+      admin: ['read', 'write', 'delete'],
+      user: ['read', 'write'],
+      guest: ['read']
+    };
+    
+    let hasPermission = permissions[role].indexOf(resource) !== -1;
+    var message = hasPermission 
+    ? `The role ${role} has permission to ${resource}.`
+    : `The role ${role} does not have permission to ${resource}.`;
+    return message;
+  };
+}
+var isAdmin = checkPermission('admin');
+var isUser = checkPermission('user');
+var isGuest = checkPermission('guest');
+
+console.log(isAdmin('write')); 
+console.log(isUser('delete')); 
+console.log(isGuest('read')); 
+
+
+
+------------------------------------cookies
+
+
+Cookies are small pieces of data stored on the client's browser. They are commonly used for session management, personalization, and tracking user behavior.The pair of name and value it is know as cookies
+
+
+suppose you visit and shopping website and then you add to cart a product and you cut it from browser then you realize you don't create the account on that website and the product will remove but with the help of cookies this problem solve without creating a account the data will be stored in the website . check on any browser-> applications
+
+
+document.cookie = "username = ram,riya;  expires = tues,10 Dec 2024 12:00:00 UTC";
+console.log(document.cookie)
+
+
+
+document.cookie = "username = ram,riya;  expires = tues,10 Dec 2024 12:00:00 UTC";
+console.log(document.cookie)
+
+
+let x = document.cookie;
+alert(x)
+
+
+
+a small text file stored on your computer used to remember information about the user saved in named = value pairs .
+
+
+toUTCString Method: Ye method date aur time ko ek standardized string format mein convert kar deti hai jo UTC timezone ke hisaab se hoti hai.
+
+
+Date Object: Ye JavaScript ka ek built-in object hota hai jo current date aur time ko represent karta hai ya aap apni marzi se bhi date aur time set kar sakte hain.
+
+
+function setacookie(name, value, daysToLive) {
+  const date = new Date();
+  date.setTime(date.getTime() + (daysToLive * 24 * 60 * 60 * 1000));
+let expires = "expires =" + date.toUTCString();
+document.cookie =`${name} = ${value} ; ${expires}`
+}
+
+
+setacookie("email","kg830@gmail.com",365)
+
+------------------------------------------------
+
+Destructuring in JavaScript is a convenient way to extract values from arrays or properties from objects and assign them to variables. Think of it as a way to "unpack" elements or properties into individual variables in a quick and readable manne
+
+
+
+//this is without Destructuring
+const numbers = [1, 2, 3];
+
+const first = numbers[0];
+const second = numbers[1];
+const third = numbers[2];
+
+console.log(first);  // 1
+console.log(second); // 2
+console.log(third);  // 3
+
+
+with Destructuring
+
+const numbers = [1, 2, 3];
+
+const [first, second, third] = numbers;
+
+console.log(first);  // 1
+console.log(second); // 2
+console.log(third);  // 3
+
+
+another example
+const numbers = [1, 2, 3, 4, 5];
+const [first, , third] = numbers;
+
+console.log(first);  // 1
+console.log(third);  // 3
+
+
+
+With objects ->
+
+
+With Destructuring
+
+
+const person = {
+    name: 'Alice',
+    age: 25,
+    city: 'New York'
+};
+
+const name = person.name;
+const age = person.age;
+const city = person.city;
+
+console.log(name);  // Alice
+console.log(age);   // 25
+console.log(city);  // New York
+
+
+
+
+With Destructuring
+
+
+const person = {
+    name: 'Alice',
+    age: 25,
+    city: 'New York'
+};
+
+const { name, age, city } = person;
+
+console.log(name);  // Alice
+console.log(age);   // 25
+console.log(city);  // New York
+
+
+
+way of writing 
+
+const person = {
+    name: 'Alice',
+    age: 25,
+    city: 'New York'
+};
+
+const { name: personName, age: personAge, city: personCity } = person;
+
+console.log(personName);  // Alice
+console.log(personAge);   // 25
+console.log(personCity);  // New York
+
+..............spread operator 
+
+
+let arr1 = [1,23,45,55,67];
+let arr2 = [5,6,7,8,9,10];
+const joinednum = arr1.concat(arr2)
+console.log(joinednum);
+
+
+
+let arr1 = [1,23,45,55,67];
+let arr2 = [5,6,7,8,9,10];
+const joinednum = [...arr1,...arr2]
+console.log(joinednum);
+
+
+-------------------------------------------------------------------------------------
+
+Local Storage ek web storage hai jo aapke web browser me data ko store karta hai. Yeh data browser band hone ke baad bhi store rehta hai. Local Storage me store kiya gaya data bina kisi expiry ke rehta hai, matlab jab tak aap use manually delete nahi karte, yeh rehta hai
+
+
+it can be used with setItem , getItem and removeItem
+
+
+// data store karana 
+localStorage.setItem('username','khushi')
+localStorage.setItem('email', 'john@example.com');
+
+// data ko retrieve karna 
+
+let username = localStorage.getItem('username');
+console.log(username)
+
+let email = localStorage.getItem('email');
+console.log(email)
+
+localStorage.removeItem('username')
+
+
+// Verify karna delete hone ke baad
+username = localStorage.getItem('username');
+console.log(username); // Output: null (kyunki 'username' delete ho chuka hai)
+
+
+// Puri local storage clear karna
+localStorage.clear();
+
+
+
+// Verify karna clear hone ke baad
+email = localStorage.getItem('email');
+console.log(email); // Output: null (kyunki puri storage clear ho chuki hai)
+
+
+--------------------------------------------------
+
+sessionStorage.setItem('sessionUsername', 'JaneDoe');
+
+
+
+/////////////////////////////////////////
+
+
+
+const btn = document.querySelector('#btn');
+const inp = document.querySelector('#inp');
+const username = document.querySelector('#username')
+btn.addEventListener("click", function () {
+  let value = inp.value;
+  localStorage.setItem('name', value);
+  location.reload();
+})
+
+window.addEventListener('load',function(){
+  const value = localStorage.getItem('name')
+  username.innerHTML =value;
+  location.reload;
+})
+
+
+/////////////////////////////////////////

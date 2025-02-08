@@ -1,0 +1,141 @@
+
+1. 400 Bad Request
+Meaning: The server thinks your request is incorrect or broken.
+Example: If you try to enter a URL with special characters without proper encoding, you might get this error.
+Common Cause: Missing or invalid data in the request, such as a required parameter.
+
+
+
+
+
+2. 401 Unauthorized
+Meaning: You need to log in or provide a valid authorization token to access this resource.
+Example: If you try to access a user’s profile without logging in, you’ll get a 401 error.
+Common Cause: Missing or incorrect authentication credentials (like tokens or API keys).
+
+
+
+
+3. 403 Forbidden
+Meaning: You’re not allowed to access this resource, even if you’re logged in.
+Example: If you try to access admin-only pages with a regular user account, you’ll see this.
+Common Cause: Permissions are restricted for the current user or account.
+
+
+
+4. 404 Not Found
+Meaning: The server can’t find what you’re looking for.
+Example: Entering a URL that doesn’t exist on a website leads to a 404 error.
+Common Cause: Incorrect URL, or the requested page/resource was removed.
+
+
+
+5. 408 Request Timeout
+Meaning: Your request took too long, so the server stopped waiting for it.
+Example: If you’re on a slow network and the server gives up waiting, this error appears.
+Common Cause: Slow connection or server overload.
+
+
+
+6. 429 Too Many Requests
+Meaning: You’re making too many requests in a short time, and the server is asking you to slow down.
+Example: Sending too many API requests per second without limits will trigger this error.
+Common Cause: Rate-limiting applied to prevent server overload.
+
+
+7. 500 Internal Server Error
+Meaning: Something went wrong on the server’s side, and it couldn’t handle the request.
+Example: If there’s a bug in the server’s code, this error might appear.
+Common Cause: Server misconfiguration, bugs, or temporary server issues.
+
+
+8. 502 Bad Gateway
+Meaning: One server got an invalid response from another server, acting as a "bad gateway" between them.
+Example: This often happens when a website is down, and a gateway server can’t connect to it.
+Common Cause: Problems with server connections or configuration issues between servers.
+
+
+9. 503 Service Unavailable
+Meaning: The server is temporarily unavailable, possibly due to maintenance or overload.
+Example: When a website undergoes maintenance, it may return a 503 error.
+Common Cause: Server maintenance, overload, or temporary issues with server capacity.
+
+
+10. 504 Gateway Timeout
+Meaning: One server took too long to respond to another server's request.
+Example: When you’re trying to reach a website, but the intermediate gateway can’t connect within a certain time, a 504 error is shown.
+Common Cause: Delays or timeout issues in server communication, like with upstream servers.\
+
+
+
+
+
+
+
+
+
+--------------------------------------------------------
+
+### Additional Important HTTP Error Codes
+
+### 1. **401 Unauthorized (with emphasis on WWW-Authenticate)**
+   - **Explanation**: Similar to the 401 code explained earlier, but in cases where the `WWW-Authenticate` header is present, it provides information on how to authorize properly (like using "Basic" or "Bearer" authentication).
+   - **Example**: Many APIs will send back a `401 Unauthorized` with `WWW-Authenticate` headers specifying the type of token needed, which helps guide the client on the correct authentication method.
+
+---
+
+### 2. **402 Payment Required**
+   - **Explanation**: This error indicates that access to the resource requires payment. Although rarely used, it’s gaining relevance in scenarios involving digital payment APIs or subscription-based content.
+   - **Example**: A website requiring you to buy a subscription might use this code to indicate that payment is necessary to proceed.
+   
+---
+
+### 3. **405 Method Not Allowed**
+   - **Explanation**: The server recognizes the resource, but the HTTP method (like GET, POST, PUT, DELETE) isn’t allowed for this particular resource.
+   - **Example**: Trying to use `POST` on an endpoint that only allows `GET` would trigger this error.
+   - **Common Cause**: Misconfigured HTTP methods or misunderstanding of the allowed actions for an endpoint.
+
+---
+
+### 4. **406 Not Acceptable**
+   - **Explanation**: The server cannot generate a response matching the list of acceptable values defined in the request's headers.
+   - **Example**: If a client requests a JSON response, but the server can only provide XML, a `406` error could be triggered.
+   - **Common Cause**: Unsupported formats or media types that are incompatible with what the server provides.
+
+---
+
+### 5. **410 Gone**
+   - **Explanation**: Indicates that the requested resource is no longer available and won’t be coming back.
+   - **Example**: This is useful in e-commerce when products are permanently removed or when a webpage is intentionally removed.
+   - **Common Cause**: The resource was intentionally removed, unlike a `404` error, which might simply mean it’s temporarily missing.
+
+---
+
+### 6. **415 Unsupported Media Type**
+   - **Explanation**: The server refuses the request because the body format is in a type it doesn’t support (like sending JSON where only XML is allowed).
+   - **Example**: Sending an image file to an endpoint that only accepts JSON would result in a `415` error.
+   - **Common Cause**: Using unsupported content types or media formats in API requests.
+
+---
+
+---
+
+### 8. **422 Unprocessable Entity**
+   - **Explanation**: The server understands the request, but the data format is invalid or doesn’t meet required validation.
+   - **Example**: Submitting a form where required fields are missing or have incorrect data types.
+   - **Common Cause**: Failing validation checks or incorrect data in the body of the request, common in RESTful APIs for CRUD operations.
+
+---
+
+### 9. **426 Upgrade Required**
+   - **Explanation**: The server requires the client to upgrade to a different protocol, usually to ensure security or compatibility.
+   - **Example**: Moving from an insecure HTTP request to HTTPS, or from HTTP/1.1 to HTTP/2.
+   - **Common Cause**: Outdated protocol versions, typically prompting the client to use newer, more secure standards.
+
+---
+
+### 10. **451 Unavailable For Legal Reasons**
+   - **Explanation**: The server is unable to provide the requested content due to legal restrictions, like censorship or compliance issues.
+   - **Example**: A web page may be blocked in certain countries due to government restrictions.
+   - **Common Cause**: Legal restrictions, often encountered in content delivery networks or region-specific services.
+

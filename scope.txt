@@ -1,0 +1,594 @@
+Scope ka matlab hota hai ek area ya context jahan se hum variables aur functions ko access kar sakte hain. JavaScript me scopes kaafi important role play karte hain kyunki yeh determine karte hain ki kaunse variables aur functions kahan accessible hain.
+
+var age = 200;
+if(true){
+  var age =20;
+  console.log(age)
+}
+console.log(age)
+
+
+1.Global Scope
+2.Function Scope
+3.Block Scope
+
+1.Global Scope -> Global scope wo hota hai jahan se humari script ke har part me variables aur functions accessible hote hain. Jo variables aur functions global scope me declare hote hain, unhe hum kahin se bhi access kar sakte hain.
+
+
+
+scope issues -> var c = 300
+if (true) {
+  let a = 10;
+  const b = 20;
+  var c = 30;
+}
+// console.log(a);
+// console.log(b);
+console.log(c);
+
+
+
+let okk = "i am global";
+
+function display() {
+  console.log(okk)
+}
+display()
+console.log(okk)
+
+
+----------------------------------------------------
+
+2.Function Scope -> Function scope ka matlab hai ki jo variables aur functions ek function ke andar declare hote hain, wo sirf us function ke andar hi accessible hote hain. Function ke bahar unhe access nahi kar sakte.
+
+
+function display() {
+  var okk = "i am global"
+  // console.log(okk)
+}
+display()
+console.log(okk)
+
+
+
+3. Block Scope -> Block scope ES6 (ECMAScript 2015) me introduce hua. Block scope ka matlab hai ki jo variables ek block (jaise if, for loops, {} ke andar) ke andar declare hote hain, wo sirf us block ke andar hi accessible hote hain. Block scope let aur const keywords ke sath kaam karta hai.
+
+
+if (true) {
+  let blockvar = "I am block scoped";
+  console.log(blockvar);
+  
+}
+console.log(blockvar)
+
+
+
+
+----------------------------------------------------------
+
+IIFE -> Immediately Invoked Function Expression
+
+IIFE ka matlab hota hai "Immediately Invoked Function Expression", jo ek aisa function hai jo turant define hone ke baad invoke (call) ho jata hai. IIFE ka use hum tab karte hain jab humein ek function ko turant execute karna hota hai bina usse baar baar call kiye. IIFE ka syntax thoda unique hota hai.
+
+(function() {
+  // code 
+})();
+
+
+another method
+
+(function() {
+  // code 
+}());
+
+
+
+----->  
+(function () {
+  let a = 10;
+  console.log(a)
+})();
+
+console.log(a)
+
+
+------>
+(function (name) {
+  console.log("helloo , " + name)
+})("A:LLLL")
+
+
+------>
+let result = (function(){
+  let per = "i am private";
+  return per;
+})();
+
+console.log(result)
+
+
+------->
+Implement an IIFE that creates a private array and exposes methods to add items to the array and retrieve the entire array.
+
+
+let arrModule = (function () {
+  let privateArr = [];
+  return {
+    addItem: function (item) {
+      privateArr.push(item);
+    },
+    getItem: function () {
+      return privateArr;
+    }
+  }
+})();
+arrModule.addItem("apple");
+arrModule.addItem("banana");
+arrModule.addItem("kiwi");
+arrModule.addItem("cheeku");
+console.log(arrModule.getItem());
+
+
+
+----------------->
+IIFE -> Data Hiding  and Encapsulation
+
+
+var globalVar = "I am global";
+
+(function () {
+  var localVar = "I am local";
+  console.log(globalVar);  // Output: I am global
+  console.log(localVar);   // Output: I am local
+})();
+
+// console.log(localVar);  // Error: localVar is not defined
+
+Example with Parameters
+
+(function (a, b) {
+  console.log("the sum of a and b:", a + b);
+})(5,10);
+
+
+Example with Return Value
+
+let result = (function () {
+  let x = 10;
+  let y = 20;
+  return x+y;
+})();
+console.log("the result is",result);
+
+
+
+---------------------
+Example in Module Pattern
+
+let myMod = (function(){
+  let private = "i am private";
+  function privateMethod(){
+    console.log(private)
+  }
+  return {
+    publicMethod:function(){
+      privateMethod();
+    }
+  }
+})();
+
+myMod.publicMethod();
+
+ES6
+(()=> console.log("I am ES6"))();
+
+
+stops global polluting
+
+
+
+--------------------------------------------------------------------------------------
+
+Local Storage ek web storage hai jo aapke web browser me data ko store karta hai. Yeh data browser band hone ke baad bhi store rehta hai. Local Storage me store kiya gaya data bina kisi expiry ke rehta hai, matlab jab tak aap use manually delete nahi karte, yeh rehta hai
+
+
+it can be used with setItem , getItem and removeItem
+
+
+// data store karana 
+localStorage.setItem('username','khushi')
+localStorage.setItem('email', 'john@example.com');
+
+// data ko retrieve karna 
+
+let username = localStorage.getItem('username');
+console.log(username)
+
+let email = localStorage.getItem('email');
+console.log(email)
+
+localStorage.removeItem('username')
+
+
+// Verify karna delete hone ke baad
+username = localStorage.getItem('username');
+console.log(username); // Output: null (kyunki 'username' delete ho chuka hai)
+
+
+// Puri local storage clear karna
+localStorage.clear();
+
+
+
+// Verify karna clear hone ke baad
+email = localStorage.getItem('email');
+console.log(email); // Output: null (kyunki puri storage clear ho chuki hai)
+
+
+--------------------------------------------------
+
+sessionStorage.setItem('sessionUsername', 'JaneDoe');
+
+
+
+/////////////////////////////////////////
+
+const btn = document.querySelector('#btn');
+const inp = document.querySelector('#inp');
+const username = document.querySelector('#username')
+btn.addEventListener("click", function () {
+  let value = inp.value;
+  localStorage.setItem('name', value);
+  location.reload();
+})
+
+window.addEventListener('load',function(){
+  const value = localStorage.getItem('name')
+  username.innerHTML =value;
+  location.reload;
+})
+
+
+
+--------------------------------------IIFE-----------------------------
+
+practice program
+
+let bankAccount = (function () {
+  // private key
+  let balance = 0;
+
+  // private function
+  function logTransaction(type, amount) {
+    console.log(`${type} of Rs. ${amount} successful. Current balance: Rs. ${balance}`);
+  }
+
+  // public methods
+  return {
+    deposit: function (amount) {
+      if (amount > 0) {
+        balance = balance + amount;
+        logTransaction('deposit', amount)
+      }
+      else {
+        console.log('invalid deposit amount');
+
+      }
+    },
+    withdraw: function (amount) {
+      if (amount > 0 && amount <= balance) {
+        balance = balance - amount;
+        logTransaction('Withdrawal', amount);
+      }
+      else {
+        console.log('Invalid withdrawal amount');
+      }
+    },
+    checkbalance:function(){
+      console.log(`Current  balance ,${balance}`);
+      
+    }
+  }
+
+})();
+
+bankAccount.deposit(1000);
+bankAccount.withdraw(500);
+bankAccount.checkbalance();
+bankAccount.withdraw(600); 
+
+
+
+
+
+-----------------------------------Generators Function---------------------------------
+
+
+Generator functions JavaScript ke special functions hote hain jo humein ek function ke execution ko pause aur resume karne ki ability dete hain. Normal functions start hote hain aur ek hi run mein end ho jate hain. Lekin generators se hum function ko rok sakte hain, kuch aur kaam kar sakte hain, aur phir se wahi function resume kar sakte hain.
+
+
+There are three main pillars of generator functions -> return, throw and yield 
+
+
+First we have to learn about the Iterators 
+
+Iterator ek aisa object hota hai jo sequence ya collection of items ko ek-ek karke access karne ka tareeka provide karta hai. Iterator object ke paas next() method hota hai jo sequence ka agla item return karta hai.
+
+value: Sequence ka current item.
+done: Boolean value jo batata hai ki sequence khatam hui ya nahi (true agar khatam ho gayi, false agar abhi baaki hai).
+
+
+lets take an example
+
+for(const item of [1,2,3,4,4,5,6,6]){
+  console.log(item)
+}
+
+how the js knows it have to go the flow left to right.
+
+
+
+abhi tak hum iteration kar rhe the jo ki sirf numbers ya alhpabet ke liye thi lekin ab se hum khud ka iteration karege 
+
+
+
+function makeaIterator(start = 0, end = Infinity, stepcount = 1) {
+  let nextstart = start;
+  let count = 0;
+  return {
+    next() {
+      // we have created a function agar mera iteration count km h end se toh ek result object ke form m print hoga 
+      let result;
+      if (count < end) {
+        result = { value: nextstart, done: false };
+        nextstart = nextstart + stepcount;
+        count++;
+        // is iteration se meri ek step ya ek count khtam ho gyi ek ek bar chalega fhir dubra tab tak chalega jab se condition satisfy hokar true na ho jaye or fhir hum result ko isi tarah return kar dege;
+        return result;
+      }
+      // when iteration ends the condition will satisfys and print the result as true by returning
+      return { value: count, done: true }
+    },
+
+  };
+}
+
+const myiterator =  makeaIterator(1,10,1)
+// is line ke according ye 1 se chal raha h 10 tak chal raha h or 1 step le raha h .
+
+let result = myiterator.next();
+/*
+ next() method hota hai jo sequence ka agla item return karta hai.
+ */
+
+ while(!result.done){
+  console.log(result.value);
+  result =  myiterator.next()
+ }
+
+
+
+ ...........BY WE CAN ABLE TO USE IT ON FOR LOOP THAT SIS WHY GENERATOR FUNCTIONS TAKES PLACE 
+
+
+ LIKE 
+ for(const val of makeaIterator(1,10,1)){
+  console.log(val)
+ }
+
+
+ thats is why generator functions take place 
+
+
+ 
+
+ 
+
+function* simpleGenerator(){
+  yield 1
+  yield 2
+  yield 3
+}
+
+
+const simple = simpleGenerator()
+console.log(simple)
+const result = simple.next()
+console.log(result)
+console.log(result)
+console.log(result)
+console.log(result)
+console.log(result)
+// but if i run like this 
+
+console.log(simple.next())
+console.log(simple.next())
+
+
+// after three doesn't have more code to run
+
+// yield work as a special type of return keyword  which doesn't wor outside a generator functions we just have to look about the next functions 
+
+
+
+
+// ------Concept of multiple generators
+
+
+
+function* simpleGenerator(){
+  yield 1
+  yield 2
+  yield 3
+}
+
+
+const simple = simpleGenerator()
+const simple2 = simpleGenerator()
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple2.next())
+console.log(simple.next())
+
+
+
+
+USECase -> we can create our infinite loop suppose we have to generate a ID 
+
+
+
+
+function* simpleGeneratorId() {
+  let id = 1
+  while(true){
+    yield id;
+    id++
+  }
+}
+
+
+const simple = simpleGeneratorId()
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+
+
+/*
+fact is call as many times you want it always throw a new id with condition false that showing here is more code to execute to reset the ids just create a new object like simple2 and store our funtion inside it
+*/
+
+
+
+------------------------------------------
+
+function* simpleGeneratorId() {
+  let id = 1
+  while (true) {
+    yield id;
+    id++
+  }
+}
+
+
+const simple = simpleGeneratorId()
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+
+
+
+---------------------array-----------
+
+function* simpleGeneratorId(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    yield arr[i]
+  }
+}
+
+
+const simple = simpleGeneratorId([12,2,4,55,6,67,6.10])
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+
+
+-----------------------------------
+
+event loop
+console.log('Start'); // 1
+
+setTimeout(() => {
+  console.log('Timeout'); // 4
+}, 0);
+
+console.log('End'); // 2
+
+// Output:
+// Start
+// End
+// Timeout
+
+
+
+console.log('Start'); // 1
+
+setTimeout(() => {
+  console.log('Timeout'); // 5
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promise'); // 3
+});
+
+console.log('End'); // 2
+
+// Output:
+// Start
+// End
+// Promise
+// Timeout
+
+
+
+Components of Event Loop:
+Call Stack: Yahaan par JavaScript ka synchronous code execute hota hai. Jaise hi koi function call hota hai, wo call stack mein push ho jata hai, aur jaise hi wo function complete hota hai, wo call stack se pop ho jata hai.
+
+Web APIs: Yahaan par asynchronous operations handle hote hain jaise setTimeout, HTTP requests, DOM events, etc. Ye browser ke through handle kiye jaate hain.
+
+Callback Queue (Task Queue): Yahaan par asynchronous operations ke callbacks store hote hain. Jab Web API apna kaam complete kar leti hai, to wo callback ko Callback Queue mein bhej deti hai.
+
+Event Loop: Ye continuously check karta rehta hai ki call stack empty hai ya nahi. Agar call stack empty hota hai, to wo callback queue se callback utha kar call stack mein push kar deta hai execution ke liye.
+
+
+
+
+-----------------------
+
+Getters and setters JavaScript mein object properties ko access aur manipulate karne ka ek powerful tarika hai. Yeh methods define karne ka ek way hai jo objects ki properties ko read (get) aur modify (set) karte hain bina directly un properties ko access kiye.
+gettter and setter 
+
+const person = {
+  name: "riya",
+  age: 35,
+  _position: "testing",
+
+
+  //getter method 
+  get position() {
+    return this._position
+
+  },
+
+  set position(newposition) {
+    this._position = newposition;
+  },
+  display() {
+    return this.position
+  }
+}
+
+console.log(person.age);
+person.position = "developer"
+console.log(person.display());
+// person.position
+// console.log(person.position());
+
+
+
+
+

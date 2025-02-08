@@ -1,0 +1,202 @@
+In JavaScript, classes are templates for creating objects. Objects are instances of classes, and classes define the properties and methods that the objects will have.
+
+
+A class is like a blueprint for creating objects. It defines the properties and methods common to all objects created from the class.
+
+
+class person {
+  constructor(name, age, city) {
+    this.naam = name;
+    this.umar = age;
+    this.sahar = city;
+  }
+  displaydetails() {
+    console.log(`${this.naam} and ${this.umar} , ${this.sahar}`);
+  }
+}
+const Person = new person("raam",56,"goa")
+Person.displaydetails()
+
+
+Properties (name, age, city).
+Method (displayDetails) to show car details.
+
+
+An object is an instance of a class. Once a class is defined, you can create multiple objects from it, each with its own unique properties.
+
+To create an object from the person class, we use the new keyword.
+
+The constructor is a special method that is called when an object is created from a class. It initializes the object’s properties.
+
+this refers to the current instance of the class.
+
+Practice time -> 
+
+1. make a class of car pass constructor make, model and year and displayDetails
+2.you're building a Library Management System, and you want to manage books using classes.
+
+expected output
+
+Title: The Alchemist
+Author: Paulo Coelho
+Genre: Fiction
+
+Title: JavaScript: The Good Parts
+Author: Douglas Crockford
+Genre: Programming
+
+
+
+
+
+2.class Book {
+    constructor(title, author, genre) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+    }
+
+    displayInfo() {
+        console.log(`Title: ${this.title}\nAuthor: ${this.author}\nGenre: ${this.genre}`);
+    }
+}
+
+// Creating objects for different books
+const book1 = new Book("The Alchemist", "Paulo Coelho", "Fiction");
+const book2 = new Book("JavaScript: The Good Parts", "Douglas Crockford", "Programming");
+
+// Displaying book details
+book1.displayInfo();
+book2.displayInfo();
+
+
+
+
+--------------------------------------------------------
+// Classes and Inheritance
+
+/*
+ES6 -> ES6 version brings the classes concept in the market to enhance the quality of code.Classes are the blueprint to creating an objects, or template constructor is a type of functions that is initialize the properties of our class rule we can't create more than one constructor in a class one class have only one constructor
+ */
+
+/*
+ Class ko ek blueprint samjho. Jaise car banane ka plan hota hai, waise hi class se hum object bana sakte hain. Constructor ek special function hai jo tab call hota hai jab object create hota hai. Jaise tum showroom mein jaake car kharidte ho, waise hi yahan hum new keyword se car object create karte hain.
+
+
+ Class
+Class ko ek blueprint samjho. Jaise ek office mein naye employee ko hire karne ka ek standard process hota hai, waise hi class se hum naye objects bana sakte hain.
+
+Constructor
+Constructor ek special function hai jo tab call hota hai jab object create hota hai. Jaise jab koi naye employee join karta hai to HR uska naam aur position register karta hai, waise hi constructor humare object ko initialize karta hai.
+
+
+ */
+
+/*
+
+Inheritance ka matlab hota hai virasat. Jaise tumhare papa ka business tum inherit karte ho, waise hi ek class dusri class ki properties aur methods inherit kar sakti hai. super keyword se hum parent class ka constructor call kar sakte hain. Jaise papa ka business chalane ke liye unse kuch cheezein seekhni padti hain, waise hi child class parent class se cheezein leti hai.
+
+
+
+Inheritance
+Inheritance ka matlab hota hai virasat. Jaise ek naye manager ko hire karte hain aur wo purane employees ke experience aur process se seekhta hai, waise hi inheritance mein ek class dusri class ki properties aur methods use kar sakti hai.
+
+Super
+super keyword se hum parent class (yahan Employee class) ka constructor call kar sakte hain. Jaise naye manager ko training mein bataya jata hai ki pehle se chal rahi processes ko kaise follow karna hai.
+
+This
+this keyword current object ko refer karta hai. Jaise manager apne aap ko refer karta hai jab wo kehta hai "Main Sales Department ka Manager hoon".
+
+
+
+class Animal {
+  constructor(name, sound) {
+    this.name = name;
+    this.sound = sound;
+  }
+  makeSound() {
+    console.log(`${this.name} makes a ${this.sound} sound`)
+  }
+}
+class Dog extends Animal {
+  constructor(name, breed,sound) {
+    // call the parent class constructor using super
+    super(name,sound)
+    this.breed = breed;
+  }
+  fetch() {
+    console.log(`${this.name} , the ${this.breed} is playing with a toy makes the sound of ${this.sound}`)
+  }
+}
+const dog = new Dog("tommy","golden retirever ","bark")
+dog.makeSound()
+dog.fetch()
+
+
+
+2.  Create a Person class with a constructor that takes name and age. Create a method to display this information.
+
+after that ----> Create a Student class that inherits from Person and adds a studentId property. Create a method to display the student's full information
+
+
+
+
+2.  Create a Person class with a constructor that takes name and age. Create a method to display this information.
+
+after that ----> Create a Student class that inherits from Person and adds a studentId property. Create a method to display the student's full information
+
+
+class Person {
+  constructor(name, age) {
+    this.naam = name;
+    this.umar = age;
+
+  }
+  info() {
+    console.log(`name is ${this.naam} and age is ${this.umar}`);
+
+  }
+}
+const person1 = new Person("Rahul", 10)
+console.log(person1);
+
+class Student extends Person {
+  constructor(name, age, StudentId) {
+    super(name, age);
+    this.StudentId = StudentId;
+  }
+  infotwo(){
+    console.log(`the details of student is ${this.naam},${this.umar},${this.StudentId}`);
+    
+  }
+}
+const studentone = new Student("chahat",77,93832);
+studentone.infotwo()
+
+
+
+
+
+---------------------------------------------
+
+3.Write a Car class with a method to change the car's model.
+
+class car {
+  constructor(brand, model){
+    this.konsabrandh = brand;
+    this.konsamodelh = model;
+
+  }
+  changemodel(newmodel){
+    this.konsamodelh = newmodel;
+  }
+  displayInfo(){
+    console.log(`this car is a ${this.konsabrandh} and ${this.konsamodelh}`);
+    
+  }
+}
+
+let car1 = new car('honda',"civic");
+car1.displayInfo();
+car1.changemodel('bmw');
+car1.displayInfo();

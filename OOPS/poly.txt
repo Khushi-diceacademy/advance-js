@@ -1,0 +1,293 @@
+class Vehicle {
+  constructor(name) {
+    this.name = name;
+  }
+
+  move() {
+    console.log(`${this.name} is moving.`);
+  }
+
+  stop() {
+    console.log(`${this.name} has stopped.`);
+  }
+}
+
+class Car extends Vehicle {
+  constructor(name, brand) {
+    super(name); // Call the parent constructor
+    this.brand = brand;
+  }
+
+  honk() {
+    console.log(`${this.name} (${this.brand}) is honking: Beep! Beep!`);
+  }
+}
+
+// Using the classes
+const myCar = new Car("Sedan", "Toyota");
+myCar.move(); // Output: Sedan is moving.
+myCar.honk(); // Output: Sedan (Toyota) is honking: Beep! Beep!
+myCar.stop(); // Output: Sedan has stopped.
+
+
+
+--------------------------------------------------
+
+Multilevel Inheritance -> Multilevel inheritance means a class inherits from another class, which itself inherits from another class.
+
+// Base class
+class Vehicle {
+  constructor(name) {
+    this.name = name;
+  }
+
+  move() {
+    console.log(`${this.name} is moving.`);
+  }
+}
+
+// First level of inheritance
+class Car extends Vehicle {
+  constructor(name, brand) {
+    super(name); // Call the parent class constructor
+    this.brand = brand;
+  }
+
+  honk() {
+    console.log(`${this.name} (${this.brand}) says: Beep Beep!`);
+  }
+}
+
+// Second level of inheritance
+class ElectricCar extends Car {
+  constructor(name, brand, batteryCapacity) {
+    super(name, brand); // Call the parent class constructor
+    this.batteryCapacity = batteryCapacity;
+  }
+
+  charge() {
+    console.log(`${this.name} is charging its ${this.batteryCapacity} kWh battery.`);
+  }
+}
+
+// Create an instance of ElectricCar
+const myTesla = new ElectricCar("Model X", "Tesla", 100);
+myTesla.move(); // Output: Model X is moving.
+myTesla.honk(); // Output: Model X (Tesla) says: Beep Beep!
+myTesla.charge(); // Output: Model X is charging its 100 kWh battery.
+
+-------------------------
+
+Inheritance without a class keyword 
+
+const parent = {
+  name: "khushi",
+  greet: function () {
+    console.log("hello from the parent object")
+  }
+};
+const child = Object.create(parent)
+
+child.sayHi = function () {
+  console.log("hey fromt the child object")
+}
+child.greet()
+console.log(child.name
+)
+
+
+-----------------------------------------------
+
+
+Abstraction in JavaScript
+Abstraction is another fundamental principle of Object-Oriented Programming (OOP). It allows you to hide the complex implementation details and show only the necessary features to the user. The goal of abstraction is to make things simpler by focusing on essential qualities, leaving out unnecessary details.
+
+Abstraction ka matlab hota hai complex details ko chhupa kar sirf zaroori information show karna. Matlab, hume sirf wahi dekhne ko milta hai jo kaam karne ke liye zaroori hai, baaki complex details ko hide kar diya jata hai.
+
+(_property for just show)
+example => car for car we need steering , accelerator , brake but we don't know working of car like motor , engine.
+
+make a private method startengine()
+
+
+
+class Car{
+  constructor(brand,model){
+    this.brand = brand;
+    this.model = model;
+  }
+  drive(){
+    console.log(`${this.brand} and ${this.model}`)
+  }
+  //private field 
+  #startEngine(){
+    console.log('engine started')
+  }
+  start(){
+    this.#startEngine();
+  }
+}
+const carone = new Car('bmw',1928);
+carone.drive()
+// carone.#startEngine() can't access 
+carone.start()
+
+
+
+Real life example
+
+
+Best example  of Abstraction
+
+Example Website: PhonePe
+
+
+Kaise Use Hota Hai: Jab aap PhonePe pe payment karte h, hum sirf amount dalte  hai aur payment confirm karna hoti h. Lekin background mein bohot saari cheezein ho rahi hoti hain:jese ki 
+
+
+User Authentication: Verify karna ki aap sach mein wahi user ho ya ni ho.
+Payment Processing: Bank se connect karna aur transaction ko complete karna.
+Fraud Detection: Algorithms use karke fraud detect karna.
+Transaction Logging: Transactions ko securely log karna future reference ke liye.
+
+
+//create Phonepe app where create three methods userauthenticate , #processPayment and #logTransaction pass amount in methods 
+(make a public method named as makepayment)
+
+
+
+
+
+output => 
+    console.log('user authenticated');
+    console.log(`Processing payment of $${amount}`);
+    console.log(`Transaction of $${amount} logged.`);
+
+
+
+
+
+
+class Phonepe {
+  constructor(user) {
+    this.user = user;
+  }
+  #authentication(){
+    console.log("checking the user");
+    return true;
+  }
+  #processPayment(amount){
+    console.log(`Processing payment of ${amount}...`);
+  }
+  #logTansaction(amount){
+    console.log(`Transaction of ${amount} logged.`);
+  }
+
+  makePayment(amount){
+    if(this.#authentication()){
+      this.#processPayment(amount);
+      this.#logTansaction(amount);
+      console.log('Payment successful');
+    }
+    else {
+      console.log('Authentication failed');
+    }
+  }
+}
+const newuser = new Phonepe("rohan")
+newuser.makePayment(5000)
+
+
+---------------------------------------------------
+
+15/1/25
+
+Polymorphism ka matlab hota hai ek method ko alag-alag tarike se use karna. Matlab, same method but different implementations.
+
+---------------------------------------------------
+class Person {
+  doAction() {
+    console.log("he/she is doing something");
+  }
+}
+class Teacher extends Person {
+  doAction() {
+    console.log('Teacher is teaching');
+
+  }
+}
+class Doctor extends Person {
+  doAction() {
+    console.log('Doctor is treating patients');
+
+  }
+}
+class Developer extends Person {
+  doAction() {
+    console.log('Developer towards tech');
+
+  }
+}
+let person = [new Teacher(), new Doctor(), new Developer(), new Person()];
+person.forEach((elem) => elem.doAction())
+
+--------------------------------------------------
+
+
+class Animal {
+  speak(){
+    console.log('Animal makes a noise');
+  }
+}
+
+class Dog extends Animal{
+  speak(){
+    console.log('Dog barks');
+  }
+}
+
+class Cat extends Animal{
+  speak(){
+    console.log('cat meows'); 
+  }
+}
+let animals = [new Dog(),new Cat(),new Animal()];
+
+animals.forEach(items => items.speak());
+
+
+------------------------------------------------------
+
+
+
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+  doAction() {
+    console.log(`${this.name} is doing something ${this.age}`);
+  }
+}
+class Teacher extends Person {
+  doAction() {
+    console.log(`${this.name} is teaching ${this.age}`);
+  }
+}
+class Doctor extends Person {
+  doAction() {
+    console.log(`${this.name} is treating patients ${this.age}`);
+  }
+}
+class Developer extends Person {
+  doAction() {
+    console.log(`${this.name} is a developer ${this.age}`);
+  }
+}
+let person = [
+  new Teacher('Mr. Sharma', 40),
+  new Doctor('Dr. Verma', 45),
+  new Developer('John', 30),
+  new Person('Generic Human', 25)
+];
+  person.forEach(item => item.doAction());

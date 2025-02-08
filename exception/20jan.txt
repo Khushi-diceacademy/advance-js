@@ -1,0 +1,160 @@
+Factory functions
+Factory functions ek aisi function hoti hai jo nayi objects create karti hai. Ye functions object ko create karne ke liye "constructor function" ka alternative hoti hain. Factory functions ka use karna asaan hota hai aur ye code ko clean aur modular banati hain.
+constructor functions
+
+Maan lo ki humein ek car manufacturing company chalani hai aur humein alag-alag types ki cars banani hain. Har car ka kuch properties (jaise color, brand, model) aur methods (jaise drive, stop) honge.
+BOM
+Code Optimization: Best Practices for Writing Efficient Code
+function createUser(name, surname, age) {
+  const user = {
+    name,
+    surname,
+    age,
+    start() {
+      return (`${this.name} ${this.surname}  and age is ${this.age}`);
+    },
+
+  }
+
+  return user;
+}
+
+var user1 = createUser("khushi","gupta",67)
+var user2 = createUser("ram","mishra",37)
+
+
+// console.log(user1);
+// console.log(user2);
+console.log(user3.start())
+console.log(user2.start())
+// in this program this is prove that user1 and user2 both have same function but taking the function as different memory allocation
+
+
+Reusability: Factory functions ek hi tarike se multiple objects create karne mein madad karti hain.
+Simplification: Ye code ko simple aur maintainable banati hain.
+No new Keyword: Factory functions mein new keyword use karne ki zarurat nahi hoti, jo ki syntax ko easy aur readable banata hai.
+
+
+limmitations-> taking alot memories
+
+
+
+//////Practices-> make a createCar function model as params and year return the object in createCar function
+
+
+function createCar(model = 'unknown', year = new Date().getFullYear()) {
+  const modelofCar = {
+    model,
+    year,
+    drive() {
+      console.log(`${model} from ${year} is driving.`);
+    }
+  }
+  return modelofCar
+}
+
+let car1 = createCar('BMW',2022);
+const car2 = createCar()
+
+car1.drive();
+car2.drive()
+
+
+--------------------------------------
+
+
+IIFE stands for Immediately Invoked Function Expression.
+
+(function(){
+  console.log("I ran immediately!");
+})
+
+----------
+without IIFE
+
+function myfunc(){
+  console.log("global scope")
+}
+myfunc();
+console.log(typeof myfunc)
+
+ // "function" (pollutes the global scope)
+
+
+ ----------
+ With IIFE
+
+ (function(){
+  console.log("this is private!")
+})();
+console.log( typeof myfunc)
+
+//output
+this is private!
+script.js:6 undefined
+
+
+//---------------
+
+with parameters and arguments 
+
+
+(function (name) {
+  console.log(`Hello, ${name}!`);
+})("raj");
+
+
+----------
+with fat arrow 
+(() => {
+  console.log("IIFE with arrow function!");
+})();
+
+
+------------------------
+
+make a counter variable and assign a IIFE function to it now make a count =0 , return increment ,decrement , value functions also return count, now run the program
+
+
+const counter = (function(){
+  let count = 0;
+  return {
+    increment:function(){
+      count++;
+      return count;
+    },
+    decrement:function(){
+      count--;
+      return count;
+    },
+    value:function(){
+      return count;
+    }
+  }
+})()
+console.log(counter.increment()); //1
+console.log(counter.value()); // 1
+console.log(counter.decrement()); // 0
+
+
+
+///fetch the api with the help of IIFE
+
+(async function(){
+  const data = await fetch('https://jsonplaceholder.typicode.com/users')
+  const post = await data.json();
+  console.log(post)
+})()
+
+
+
+----------------------------
+homework
+Use IIFE to Create a Timer
+
+
+
+----------------------------------
+
+counstructor function
+A constructor function is a special type of function in JavaScript used to create objects. Unlike regular functions, it’s called with the new keyword, which sets up a new object for the function to initialize.

@@ -1,0 +1,242 @@
+Closure ek aisa concept hai jo function aur uske lexical environment (jaha pe wo function create hua tha) ko yaad rakhta hai, even after that function is executed. Closure ko samajhne ke liye, humein pehle scope aur lexical environment ko samajhna hoga
+
+
+
+Scope: Ek variable ka scope woh area hai jaha se us variable ko access kiya ja sakta hai. JavaScript mein do types ke scope hote hain: global scope aur local scope.
+Lexical Environment: Yeh basically ek data structure hai jo variables aur functions ke references ko hold karta hai.
+
+
+function init(){
+  let name = "mozilla";
+  function displayname(){
+    console.log(name)
+  }
+  displayname();
+}
+init()
+
+functions are sharing the memory every function creates it know global execution context where the function works so, we can say that every functions has ability to share the memory to another function
+
+
+function outer() {
+  let username = "khushi"
+  function innerfunction() {
+    // let password = "my12345"  //not access
+    console.log(username);
+  }
+  function innertwo(){
+    console.log("inner two",username);
+    // console.log(password);
+    // error    
+  }
+  innerfunction()
+  innertwo()
+}
+outer()
+
+// child1 can't be able to access to child 2 they can only access with parent function and parent can also not able to access the child variables or elements
+
+
+
+Points 
+
+Global Execution Context (GEC)
+Global Execution Context woh context hota hai jo JavaScript engine sabse pehle create karta hai jab code run hota hai. Jab browser ya Node.js JavaScript file ko load karta hai, tab ek Global Execution Context create hota hai.
+
+Execution Context
+Jab bhi koi function call hota hai, ek naya Execution Context create hota hai. Har function ka apna Execution Context hota hai. Is context mein function ke variables, arguments, aur local scope store hota hai.
+
+
+Key Points:
+Har function call ke liye ek naya Execution Context banta hai.
+
+Global Execution Context sabse pehle aur sabse last mein exist karta hai.
+
+Jab ek function complete hota hai, uska Execution Context destroy ho jata hai.
+
+// Global Execution Context starts here
+var globalVar = "I am a global variable";
+
+function outerFunction() {
+    // New Execution Context for outerFunction starts here
+    var outerVar = "I am an outer variable";
+
+    function innerFunction() {
+        // New Execution Context for innerFunction starts here
+        var innerVar = "I am an inner variable";
+        console.log(globalVar); // "I am a global variable"
+        console.log(outerVar);  // "I am an outer variable"
+        console.log(innerVar);  // "I am an inner variable"
+    }
+
+    innerFunction();
+    // Execution Context for innerFunction ends here
+}
+
+outerFunction();
+// Execution Context for outerFunction ends here
+
+console.log(globalVar); // "I am a global variable"
+// Global Execution Context ends here
+
+
+
+
+----------------------------
+Closure -> Closure ka matlab h jab tum ek function ko return kr dete ho or uska scope and lexical scope return ho jata h usye kehte h Closure.
+
+ex->
+
+function makefunc(){
+  const name ="moxila"
+  function displayname(){
+    console.log(name);
+  }
+  return displayname
+}
+const myFunc = makefunc();
+myFunc()
+// by this scope of function is gone we can't able to give child scoping yaha sirf context and memory share hoti h 
+
+real example make two buttons if i click on plum the bgc will change at plum and if i click on cadetblue it will change the bgc cadetblue
+
+
+let btn1 = document.getElementById('plum');
+let btn2 = document.getElementById('cadetblue')
+
+
+// btn1.onclick = function(){
+//   document.body.style.backgroundColor = 'plum'
+// }
+// btn2.onclick = function(){
+//   document.body.style.backgroundColor = 'cadetblue'
+// }
+
+
+/*this will not work out  */
+function clickthebutton(color){
+  // document.body.style.backgroundColor = `${color}`
+
+  return function(){
+  document.body.style.backgroundColor = `${color}`
+
+  // this will access the color
+    }
+}
+btn1.onclick = clickthebutton('plum')
+btn2.onclick= clickthebutton('cadetblue')
+// but it will run without clicking because this is function
+
+// but if we have to deal with 500 buttons but we always follow Dry code don't repeat yourself
+
+
+
+pixels generator -> homework
+
+
+
+
+Destructuring in JavaScript is a convenient way to extract values from arrays or properties from objects and assign them to variables. Think of it as a way to "unpack" elements or properties into individual variables in a quick and readable manne
+
+
+
+//this is without Destructuring
+const numbers = [1, 2, 3];
+
+const first = numbers[0];
+const second = numbers[1];
+const third = numbers[2];
+
+console.log(first);  // 1
+console.log(second); // 2
+console.log(third);  // 3
+
+
+with Destructuring
+
+const numbers = [1, 2, 3];
+
+const [first, second, third] = numbers;
+
+console.log(first);  // 1
+console.log(second); // 2
+console.log(third);  // 3
+
+
+another example
+const numbers = [1, 2, 3, 4, 5];
+const [first, , third] = numbers;
+
+console.log(first);  // 1
+console.log(third);  // 3
+
+
+
+With objects ->
+
+
+With Destructuring
+
+
+const person = {
+    name: 'Alice',
+    age: 25,
+    city: 'New York'
+};
+
+const name = person.name;
+const age = person.age;
+const city = person.city;
+
+console.log(name);  // Alice
+console.log(age);   // 25
+console.log(city);  // New York
+
+
+
+
+With Destructuring
+
+
+const person = {
+    name: 'Alice',
+    age: 25,
+    city: 'New York'
+};
+
+const { name, age, city } = person;
+
+console.log(name);  // Alice
+console.log(age);   // 25
+console.log(city);  // New York
+
+
+
+way of writing 
+
+const person = {
+    name: 'Alice',
+    age: 25,
+    city: 'New York'
+};
+
+const { name: personName, age: personAge, city: personCity } = person;
+
+console.log(personName);  // Alice
+console.log(personAge);   // 25
+console.log(personCity);  // New York
+
+..............spread operator 
+
+
+let arr1 = [1,23,45,55,67];
+let arr2 = [5,6,7,8,9,10];
+const joinednum = arr1.concat(arr2)
+console.log(joinednum);
+
+
+
+let arr1 = [1,23,45,55,67];
+let arr2 = [5,6,7,8,9,10];
+const joinednum = [...arr1,...arr2]
+console.log(joinednum);

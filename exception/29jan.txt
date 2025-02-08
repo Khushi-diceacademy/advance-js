@@ -1,0 +1,303 @@
+function setacookie(name, value, daysToLive) {
+  const date = new Date();
+  date.setTime(date.getTime() + (daysToLive * 24 * 60 * 60 * 1000));
+let expires = "expires =" + date.toUTCString();
+document.cookie =`${name} = ${value} ; ${expires}`
+}
+
+
+setacookie("email","kg830@gmail.com",365)
+
+-----------------------------------------------
+
+
+-----------------------------------Generators Function---------------------------------
+
+Generator functions JavaScript ke special functions hote hain jo humein ek function ke execution ko pause aur resume karne ki ability dete hain. Normal functions start hote hain aur ek hi run mein end ho jate hain. Lekin generators se hum function ko rok sakte hain, kuch aur kaam kar sakte hain, aur phir se wahi function resume kar sakte hain.
+
+
+There are three main pillars of generator functions -> return, throw and yield 
+
+
+First we have to learn about the Iterators 
+
+Iterator ek aisa object hota hai jo sequence ya collection of items ko ek-ek karke access karne ka tareeka provide karta hai. Iterator object ke paas next() method hota hai jo sequence ka agla item return karta hai.
+
+value: Sequence ka current item.
+done: Boolean value jo batata hai ki sequence khatam hui ya nahi (true agar khatam ho gayi, false agar abhi baaki hai).
+
+
+lets take an example
+
+for(const item of [1,2,3,4,4,5,6,6]){
+  console.log(item)
+}
+
+how the js knows it have to go the flow left to right.
+
+
+
+abhi tak hum iteration kar rhe the jo ki sirf numbers ya alhpabet ke liye thi lekin ab se hum khud ka iteration karege 
+
+
+
+function makeaIterator(start = 0, end = Infinity, stepcount = 1) {
+  let nextstart = start;
+  let count = 0;
+  return {
+    next() {
+      // we have created a function agar mera iteration count km h end se toh ek result object ke form m print hoga 
+      let result;
+      if (count < end) {
+        result = { value: nextstart, done: false };
+        nextstart = nextstart + stepcount;
+        count++;
+        // is iteration se meri ek step ya ek count khtam ho gyi ek ek bar chalega fhir dubra tab tak chalega jab se condition satisfy hokar true na ho jaye or fhir hum result ko isi tarah return kar dege;
+        return result;
+      }
+      // when iteration ends the condition will satisfys and print the result as true by returning
+      return { value: count, done: true }
+    },
+
+  };
+}
+
+const myiterator =  makeaIterator(1,10,1)
+// is line ke according ye 1 se chal raha h 10 tak chal raha h or 1 step le raha h .
+
+let result = myiterator.next();
+/*
+ next() method hota hai jo sequence ka agla item return karta hai.
+ */
+
+ while(!result.done){
+  console.log(result.value);
+  result =  myiterator.next()
+ }
+
+
+
+ ...........BY WE CAN ABLE TO USE IT ON FOR LOOP THAT SIS WHY GENERATOR FUNCTIONS TAKES PLACE 
+
+
+ LIKE 
+ for(const val of makeaIterator(1,10,1)){
+  console.log(val)
+ }
+
+
+ thats is why generator functions take place 
+
+
+ 
+
+ 
+
+function* simpleGenerator(){
+  yield 1
+  yield 2
+  yield 3
+}
+
+
+const simple = simpleGenerator()
+console.log(simple)
+const result = simple.next()
+console.log(result)
+console.log(result)
+console.log(result)
+console.log(result)
+console.log(result)
+// but if i run like this 
+
+console.log(simple.next())
+console.log(simple.next())
+
+
+// after three doesn't have more code to run
+
+// yield work as a special type of return keyword  which doesn't wor outside a generator functions we just have to look about the next functions 
+
+
+
+
+// ------Concept of multiple generators
+
+
+
+function* simpleGenerator(){
+  yield 1
+  yield 2
+  yield 3
+}
+
+
+const simple = simpleGenerator()
+const simple2 = simpleGenerator()
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple2.next())
+console.log(simple.next())
+
+
+
+
+USECase -> we can create our infinite loop suppose we have to generate a ID 
+
+
+
+
+function* simpleGeneratorId() {
+  let id = 1
+  while(true){
+    yield id;
+    id++
+  }
+}
+
+
+const simple = simpleGeneratorId()
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+
+
+/*
+fact is call as many times you want it always throw a new id with condition false that showing here is more code to execute to reset the ids just create a new object like simple2 and store our funtion inside it
+*/
+
+
+
+------------------------------------------
+
+function* simpleGeneratorId() {
+  let id = 1
+  while (true) {
+    yield id;
+    id++
+  }
+}
+
+
+const simple = simpleGeneratorId()
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+
+
+
+---------------------array-----------
+
+function* simpleGeneratorId(arr) {
+  for (let i = 0; i < arr.length; i++) {
+    yield arr[i]
+  }
+}
+
+
+const simple = simpleGeneratorId([12,2,4,55,6,67,6.10])
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+console.log(simple.next())
+
+
+-----------------------------------
+
+event loop
+console.log('Start'); // 1
+
+setTimeout(() => {
+  console.log('Timeout'); // 4
+}, 0);
+
+console.log('End'); // 2
+
+// Output:
+// Start
+// End
+// Timeout
+
+
+
+console.log('Start'); // 1
+
+setTimeout(() => {
+  console.log('Timeout'); // 5
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promise'); // 3
+});
+
+console.log('End'); // 2
+
+// Output:
+// Start
+// End
+// Promise
+// Timeout
+
+
+
+Components of Event Loop:
+Call Stack: Yahaan par JavaScript ka synchronous code execute hota hai. Jaise hi koi function call hota hai, wo call stack mein push ho jata hai, aur jaise hi wo function complete hota hai, wo call stack se pop ho jata hai.
+
+Web APIs: Yahaan par asynchronous operations handle hote hain jaise setTimeout, HTTP requests, DOM events, etc. Ye browser ke through handle kiye jaate hain.
+
+Callback Queue (Task Queue): Yahaan par asynchronous operations ke callbacks store hote hain. Jab Web API apna kaam complete kar leti hai, to wo callback ko Callback Queue mein bhej deti hai.
+
+Event Loop: Ye continuously check karta rehta hai ki call stack empty hai ya nahi. Agar call stack empty hota hai, to wo callback queue se callback utha kar call stack mein push kar deta hai execution ke liye.
+
+
+
+
+-----------------------
+
+Getters and setters JavaScript mein object properties ko access aur manipulate karne ka ek powerful tarika hai. Yeh methods define karne ka ek way hai jo objects ki properties ko read (get) aur modify (set) karte hain bina directly un properties ko access kiye.
+gettter and setter 
+
+const person = {
+  name: "riya",
+  age: 35,
+  _position: "testing",
+
+
+  //getter method 
+  get position() {
+    return this._position
+
+  },
+
+  set position(newposition) {
+    this._position = newposition;
+  },
+  display() {
+    return this.position
+  }
+}
+
+console.log(person.age);
+person.position = "developer"
+console.log(person.display());
+// person.position
+// console.log(person.position());
+
+
+
+
+

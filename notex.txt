@@ -1,0 +1,441 @@
+Asynchronous Js -> Start now finish later.As we know js is a synchronous langauge it runs the code line by code that's why we call the JS a single threaded language because it runs the code line by code.
+
+
+one statement executing at a time it is called single threaded language.
+
+
+
+Start something now and finish it later
+
+Types are callback funtions and promises we use the callback functions and promises to run and manage the Asynchronous code 
+
+
+
+We use Asynchronous code to network request for data to a database or an API fetching 
+
+
+
+execution context -> execute one line of code at a time 
+
+
+
+sync task is called main call stack 
+
+and async is called callback queue 
+
+
+settimout
+setinterval
+Fetch Axios
+promises
+HTTP
+using Async
+
+-----------------
+callbacks
+Event Loop
+Callbacks vs Promises vs Async / Await 
+
+// console.log("line one");
+
+// setTimeout(() => {
+//   console.log("line two");
+//   // it has fired the callback function
+// }, 2000);
+// console.log("line three");
+
+
+
+------------------------16/10/24-----------------
+
+
+
+Asynchronous javascript -> A callback function is a function that is passed as an argument to another function and is executed after the completion of some operations.
+
+This mechanism allows JavaScript to perform tasks like reading files, making HTTP requests, or waiting for user input without blocking the execution of the program.
+
+
+
+Why Use Callback Functions?
+JavaScript runs in a single-threaded environment, meaning it can only execute one command at a time. Callback functions help manage asynchronous operations, ensuring that the code continues to run smoothly without waiting for tasks to complete. This approach is crucial for maintaining a responsive and efficient program.
+
+
+
+setinterval - aisa koi bhi code jismein kuch time lagega ya lagta h , us code ko js by default in most cases async code maan kar side stack m daal kar chala diya jata h
+
+
+setinterval ka code kuch der baad kuch kuch der baad chalta h bar bar ke particular time ke bad 
+
+
+setInterval(()=>{
+  console.log("yes")
+},1000) 
+
+
+setTimeout - ek time ke baad code chale that is settimeout 
+
+setTimeout(()=>{
+  console.log("hy");
+  
+},2000)
+
+
+Fetch API => ye kisi aur url ya api ka data ko bulane ya fetch karne ke liye istemal hota h 
+
+
+Axios (or other HTTP libraries) - ye bhi wahi karega jo fetch karta h bas ya thoda environment friendly flexible and executive h 
+
+
+promises -> promise ke andar jo bhi code likhoge vo apna kaam karega or 
+
+
+
+we can say that sync is main call stack and async is callback queue or side stack humesha yad rakhna synchronous code humesha phele chalega or asynchronous code humesha main stack ke khatam hone ke bad chalega   
+
+
+event loop is a mechanism that checks that the sync is empty or not 
+
+setinterval 
+
+
+var count = 1;
+const humrainterval = setInterval(() => {
+  count++;
+  console.log(count);
+  if (count === 3) clearInterval(humrainterval)
+
+},1000)
+
+
+
+
+---------------------------
+
+Fetch API - ye kisi or api ka data layega
+
+
+
+The throw statement is used to throw an exception, which interrupts the current flow of the program and transfers control to the nearest enclosing catch block. The return statement is used to exit a function and optionally return a value to its caller.
+
+
+
+
+// // /*
+// // new  keyword
+// // this keyword -> current context
+// //  */
+// // // let user = {
+// // //     name :"khushi",
+// // //     age:22,
+// // //     isdisplay:function(){
+// // //         console.log(`heyyy! ${this.name} and age is ${this.age}`);
+// // //         console.log(this)
+// // //     }
+// // // };
+// // // user.isdisplay()
+
+// // // const abc = () => {
+// // //   console.log(this);
+// // // };
+// // // abc();
+
+// // // function abcde(){
+// // //     console.log(this)
+// // // }
+// // // abcde()
+
+// // // OOPS-> object oriented programming language
+
+// // // 1. make a class of car pass constructor make, model and year and displayDetails
+// // // class Person {
+// // //   constructor(name, age, city) {
+// // //     this.naam = name;
+// // //     this.umar = age;
+// // //     this.sehar = city;
+// // //   }
+// // //   displayinfo() {
+// // //     console.log(
+// // //       `hello ${this.naam} and age is ${this.umar} and city is ${this.sehar}`
+// // //     );
+// // //   }
+// // // }
+// // // const personone = new Person("rohan",18,"delhi")
+// // // const persontwo = new Person("khushi",22,"gwalior")
+// // // const personthree = new Person("tanvi",20,"delhi")
+
+// // // personone.displayinfo()
+// // // persontwo.displayinfo()
+// // // personthree.displayinfo()
+
+// // class Animal {
+// //   constructor(name, sound) {
+// //     this.name = name;
+// //     this.sound = sound;
+// //   }
+// //   makesound() {
+// //     console.log(
+// //       `name of animal is ${this.name} and makes the sound ${this.sound}`
+// //     );
+// //   }
+// // }
+// // class Dog extends Animal {
+// //   constructor(name, sound, breed) {
+// //     super(name, sound);
+// //     // super key is used to call the properties of parent class
+// //     this.breed = breed;
+// //   }
+// //   fetch() {
+// //     console.log(
+// //       `name of animal is ${this.name} and makes the sound ${this.sound} and the breed is ${this.breed}`
+// //     );
+// //   }
+// // }
+// // const dogone = new Dog("tommy", "bark", "golden retirever");
+// // dogone.makesound()
+// // dogone.fetch()
+
+// // async js
+// // console.log("heyy");
+// // setTimeout(()=>{
+// //   console.log("hello")
+// // })
+// // console.log("bye")
+
+// // call back -> jo ek function dusre function ke argument ki tarah pass kare usye bolte h callbacks
+
+// // function hello(params){
+// // console.log("helllo")
+// // params()
+// // }
+// // console.log("kese ho  ji")
+// // function goodbye(){
+// //   setTimeout(()=>{
+// //     console.log("goodbye")
+// //   },2000)
+// // }
+// // hello(goodbye)
+
+// // letsmakecake(() => {
+// //   mixthechocolate(() => {
+// //     bakethecake(() => {
+// //       decoratethecake(() => {
+// //         serving();
+// //       });
+// //     });
+// //   });
+// // });
+
+// // function letsmakecake(callback) {
+// //   console.log("add milk to a bowl and items");
+// //   setTimeout(() => {
+// //     console.log("mixes it well");
+// //     callback();
+// //   }, 2000);
+// // }
+
+// // function mixthechocolate(callback) {
+// //   console.log("melting the chocholate mixing it");
+// //   setTimeout(() => {
+// //     console.log("mixes it well with chocolate batter is ready");
+// //     callback();
+// //   }, 3000);
+// // }
+
+// // function bakethecake(callback) {
+// //   console.log("last time mix it well");
+// //   setTimeout(() => {
+// //     console.log("bake the cake");
+// //     callback();
+// //   }, 4000);
+// // }
+// // function decoratethecake(callback) {
+// //   console.log("using cones of many colors");
+// //   setTimeout(() => {
+// //     console.log("sparkle the glitter on cake and decorate it well ");
+// //     callback();
+// //   }, 1000);
+// // }
+
+// // function serving() {
+// //   console.log("serving the cake enjoying it well 🎂🎂🎂🍰");
+// // }
+
+// // const api = fetch('https://randomuser.me/api/');
+// // api.then((raw)=>{
+// //   return raw.json()
+// // })
+// // // then and catch
+// // .then((res)=>{
+// //   console.log(res)
+// // })
+// // .catch((err)=>{
+// //   console.log(err)
+// // })
+
+// // function fetchtheurl() {
+// //   const url = [
+// //     "https://jsonplaceholder.typicode.com/posts",
+// //     "https://randomuser.me/api/",
+// //     "https://dog.ceo/api/breeds/image/random",
+// //     "https://api.thecatapi.com/v1/images/search",
+// //     "https://api.adviceslip.com/advice",
+// //   ];
+
+// //   url.forEach((item) => {
+// //     fetch(item)
+// //       .then((raw) => {
+// //      return  raw.json();
+// //       })
+// //       .then
+// //       ((res) => {
+// //         console.log(res);
+// //       })
+// //       .catch((err)=>{
+// //         console.log(err)
+// //       })
+// //   });
+// // }
+// // fetchtheurl();
+
+// // let promiseone = new Promise(function (resolve, reject) {
+// //   console.log("task one");
+// //   setTimeout(() => {
+// //     console.log("task two taking time");
+// //     resolve();
+// //   }, 2000);
+// // });
+// // promiseone
+// //   .then(() => {
+// //     console.log("promise run successfully");
+// //   })
+// //   .catch(() => {
+// //     console.log("erro something went wrong");
+// //   });
+
+// // let promisetwo = new Promise(function (resolve, reject) {
+// //   setTimeout(() => {
+// //     console.log("user details are passing ");
+// //     resolve({ name: "khushi", age: 22 });
+// //   });
+// // });
+// // promisetwo.then((details)=>{
+// //   console.log(details)
+// //   console.log("promise run successfully")
+// // })
+
+// // const promisethree = new Promise(function (resolve, reject) {
+// //   setTimeout(() => {
+// //     let error = true;
+// //     if (error === true) {
+// //       console.log("something went wrong error");
+// //       reject("something is wrong in this code");
+// //     } else {
+// //       console.log("here are details");
+// //       resolve({ username: "khushi", age: 22 })
+// //     }
+// //   }, 2000);
+// // });
+// // promisethree
+// //   .then((details) => {
+// //     console.log(details);
+// //     console.log("promise run succesfully");
+// //   })
+
+// //   .catch((err) => {
+// //     console.log(err);
+// //   });
+
+// // promises
+// const promiseone = new Promise(function (resolve, reject) {
+//   setTimeout(() => {
+//     let age = 12;
+//     if (age < 18) {
+//       console.log("You're not valid to vote ")
+//       reject('you are not 18+')
+//     }
+//     else{
+//       console.log("hello user you can vote please fill your details here")
+//       resolve({username:"khushi",age:22})
+//     }
+//   },2000);
+// });
+// promiseone.then((details)=>{
+//   console.log(details)
+//   console.log("promise run successfully")
+// }).catch((err)=>{
+//   console.log(err)
+// })
+
+// const api = fetch("https://randomuser.me/api/");
+// api
+//   .then((kacha) => {
+//     return kacha.json();
+//   })
+//   .then((data)=>{
+//     console.log(data.results[0])
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
+// console.log("hey")
+
+// const promisetwo = new Promise(function (resolve, reject) {
+//   const api = fetch("https://randomuser.me/api/");
+//   api
+//     .then((raw) => raw.json())
+//     .then((data) => {
+//       console.log(data.results[0]);
+//       if (data.results[0].gender === "female") {
+//         resolve();
+//       } else {
+//         reject();
+//       }
+//     });
+// });
+// promisetwo
+//   .then(() => {
+//     console.log("female : button is green💚");
+//   })
+//   .catch(() => {
+//     console.log("male : button is red❤️");
+//   });
+
+// const api = axios.get('https://randomuser.me/api/');
+// api.then((res)=>{
+//     console.log(res.data)
+// })
+// .catch((err)=>{
+//     console.log(err)
+// })
+
+// async and await -> to make the syntax easier there is introduced a new concept of async and await that is used to write our async code and manage the code in a easier way.
+
+// async function fetchthedata(){
+    // const api = await fetch('https://randomuser.me/api/');
+    // const data = await api.json();
+    // console.log(data)
+// }
+// fetchthedata()
+
+async function taskone() {
+  console.log("task one is on process...");
+  setTimeout(() => {
+    console.log("task one completed ");
+    return;
+  }, 1000);
+}
+async function tasktwo() {
+  console.log("task two is on process...");
+  setTimeout(() => {
+    console.log("task two completed ");
+    return;
+  }, 2000);
+}
+
+async function results() {
+  await taskone();
+  await tasktwo();
+  console.log("promises are completed ");
+}
+
+results();

@@ -1,0 +1,161 @@
+counstructor function
+A constructor function is a special type of function in JavaScript used to create objects. Unlike regular functions, it’s called with the new keyword, which sets up a new object for the function to initialize.
+
+function person(name, age) {
+  this.name = name;
+  this.age = age;
+  this.sayhello = function () {
+    console.log(`hello my name is ${this.name} and age is ${this.age}`)
+  }
+}
+const person1 = new person('aliice',24)
+const person2 = new person('ajioe',34)
+person1.sayhello();
+person2.sayhello();
+console.log(person1.name);
+
+
+A new empty object is created ({}).
+The constructor function is called, and this inside the function points to the new object.
+Properties (name and age) and methods (sayHello) are added to the new object.
+The object is automatically returned.
+
+
+
+
+Closure ek aisa concept hai jo function aur uske lexical environment (jaha pe wo function create hua tha) ko yaad rakhta hai, even after that function is executed. Closure ko samajhne ke liye, humein pehle scope aur lexical environment ko samajhna hoga
+
+
+Scope: Ek variable ka scope woh area hai jaha se us variable ko access kiya ja sakta hai. JavaScript mein do types ke scope hote hain: global scope aur local scope.
+Lexical Environment: Yeh basically ek data structure hai jo variables aur functions ke references ko hold karta hai.
+
+
+function init(){
+  let name = "mozilla";
+  function displayname(){
+    console.log(name)
+  }
+  displayname();
+}
+init()
+
+
+functions are sharing the memory every function creates it know global execution context where the function works so, we can say that every functions has ability to share the memory to another function
+
+
+
+function outer() {
+  let username = "khushi"
+  function innerfunction() {
+    // let password = "my12345"  //not access
+    console.log(username);
+  }
+  function innertwo(){
+    console.log("inner two",username);
+    // console.log(password);
+    // error    
+  }
+  innerfunction()
+  innertwo()
+}
+outer()
+
+
+// child1 can't be able to access to child 2 they can only access with parent function and parent can also not able to access the child variables or elements
+
+
+
+
+
+Points 
+
+Global Execution Context (GEC)
+Global Execution Context woh context hota hai jo JavaScript engine sabse pehle create karta hai jab code run hota hai. Jab browser ya Node.js JavaScript file ko load karta hai, tab ek Global Execution Context create hota hai.
+
+Execution Context
+Jab bhi koi function call hota hai, ek naya Execution Context create hota hai. Har function ka apna Execution Context hota hai. Is context mein function ke variables, arguments, aur local scope store hota hai.
+
+
+Key Points:
+Har function call ke liye ek naya Execution Context banta hai.
+
+Global Execution Context sabse pehle aur sabse last mein exist karta hai.
+
+Jab ek function complete hota hai, uska Execution Context destroy ho jata hai.
+
+
+
+// Global Execution Context starts here
+var globalVar = "I am a global variable";
+
+function outerFunction() {
+    // New Execution Context for outerFunction starts here
+    var outerVar = "I am an outer variable";
+
+    function innerFunction() {
+        // New Execution Context for innerFunction starts here
+        var innerVar = "I am an inner variable";
+        console.log(globalVar); // "I am a global variable"
+        console.log(outerVar);  // "I am an outer variable"
+        console.log(innerVar);  // "I am an inner variable"
+    }
+
+    innerFunction();
+    // Execution Context for innerFunction ends here
+}
+
+outerFunction();
+// Execution Context for outerFunction ends here
+
+console.log(globalVar); // "I am a global variable"
+// Global Execution Context ends here
+
+
+-----------------------------------------------------------
+
+Closure -> Closure ka matlab h jab tum ek function ko return kr dete ho or uska scope and lexical scope return ho jata h usye kehte h Closure.
+
+
+ex->
+
+function makefunc(){
+  const name ="mozilla"
+  function displayname(){
+    console.log(name);
+  }
+  return displayname
+}
+const myFunc = makefunc();
+myFunc()
+
+
+
+real example make two buttons if i click on plum the bgc will change at plum and if i click on cadetblue it will change the bgc cadetblue
+
+let btn1 = document.getElementById('plum');
+let btn2 = document.getElementById('cadetblue')
+
+
+// btn1.onclick = function(){
+//   document.body.style.backgroundColor = 'plum'
+// }
+// btn2.onclick = function(){
+//   document.body.style.backgroundColor = 'cadetblue'
+// }
+
+
+/*this will not work out  */
+function clickthebutton(color){
+  // document.body.style.backgroundColor = `${color}`
+
+  return function(){
+  document.body.style.backgroundColor = `${color}`
+
+  // this will access the color
+    }
+}
+btn1.onclick = clickthebutton('plum')
+btn2.onclick= clickthebutton('cadetblue')
+// but it will run without clicking because this is function
+
+// but if we have to deal with 500 buttons but we always follow Dry code don't repeat yourself

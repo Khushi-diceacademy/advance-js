@@ -1,0 +1,193 @@
+function setacookie(name, value, daysToLive) {
+  const date = new Date();
+  date.setTime(date.getTime() + (daysToLive * 24 * 60 * 60 * 1000));
+let expires = "expires =" + date.toUTCString();
+document.cookie =`${name} = ${value} ; ${expires}`
+}
+
+
+setacookie("email","kg830@gmail.com",365)
+
+
+------------------------------------------------------------
+
+
+-----------------------------------
+
+event loop
+console.log('Start'); // 1
+
+setTimeout(() => {
+  console.log('Timeout'); // 4
+}, 0);
+
+console.log('End'); // 2
+
+// Output:
+// Start
+// End
+// Timeout
+
+
+
+console.log('Start'); // 1
+
+setTimeout(() => {
+  console.log('Timeout'); // 5
+}, 0);
+
+Promise.resolve().then(() => {
+  console.log('Promise'); // 3
+});
+
+console.log('End'); // 2
+
+// Output:
+// Start
+// End
+// Promise
+// Timeout
+
+
+
+Components of Event Loop:
+Call Stack: Yahaan par JavaScript ka synchronous code execute hota hai. Jaise hi koi function call hota hai, wo call stack mein push ho jata hai, aur jaise hi wo function complete hota hai, wo call stack se pop ho jata hai.
+
+Web APIs: Yahaan par asynchronous operations handle hote hain jaise setTimeout, HTTP requests, DOM events, etc. Ye browser ke through handle kiye jaate hain.
+
+Callback Queue (Task Queue): Yahaan par asynchronous operations ke callbacks store hote hain. Jab Web API apna kaam complete kar leti hai, to wo callback ko Callback Queue mein bhej deti hai.
+
+Event Loop: Ye continuously check karta rehta hai ki call stack empty hai ya nahi. Agar call stack empty hota hai, to wo callback queue se callback utha kar call stack mein push kar deta hai execution ke liye.
+
+
+------------------------------------------
+
+Destructuring is a way to unpack values from arrays or properties from objects into distinct variables in JavaScript. Think of it as "breaking down" complex structures into smaller, usable parts
+
+
+without Destructuring
+
+const fruits = ['apple','banana','orange'];
+const firstfruit = fruits[0];
+const secondfruit = fruits[1];
+const thirdfruit = fruits[2];
+ 
+console.log(firstfruit,secondfruit,thirdfruit);
+
+
+
+with Destructuring
+
+const fruits = ['apple', 'banana', 'orange'];
+
+const [fruit1, fruit2, fruit3] = fruits;
+
+console.log(fruit1);
+
+
+💡Q: How can you skip elements while destructuring?
+
+const [firstcolor, , thirdcolor] = ["Red", "Green", "Blue", "Yellow"];
+//skipping green
+console.log(firstcolor,thirdcolor);
+
+
+
+ Object Destructuring
+
+
+Memory updated
+JavaScript Destructuring: A Fun & Easy Guide 🚀
+Destructuring is a way to unpack values from arrays or properties from objects into distinct variables in JavaScript. Think of it as "breaking down" complex structures into smaller, usable parts. Let’s explore with engaging examples and common interview questions!
+
+🎯 1. Array Destructuring
+👉 Extract values from an array easily!
+
+javascript
+Copy code
+const fruits = [" Apple", " Banana", "Orange"];
+
+// Normal way
+const firstFruit = fruits[0];
+const secondFruit = fruits[1];
+
+console.log(firstFruit, secondFruit); //  Apple  Banana
+
+// 🎯 Using destructuring
+const [fruit1, fruit2, fruit3] = fruits;
+
+console.log(fruit1, fruit2, fruit3); //  Apple  Banana  Orange
+🔥 Interview Question
+💡 Q: How can you skip elements while destructuring?
+
+javascript
+Copy code
+const colors = ["Red", "Green", "Blue", "Yellow"];
+
+// Skipping "Green"
+const [firstColor, , thirdColor] = colors;
+
+console.log(firstColor, thirdColor); // Red Blue
+
+
+🎯 2. Object Destructuring
+
+const person = {
+  named: "Elena",
+  age: 25,
+  city: "New York",
+};
+
+const {named,age,city} = person;
+console.log(named)
+
+
+------------------
+
+const person = {
+  name: "John",
+  age: 30,
+  gender: "Male",
+  email: "john@example.com",
+  phone: "123-456-7890",
+  country: "USA",
+  state: "California",
+  zip: "90001",
+  profession: "Engineer",
+  company: "TechCorp",
+  hobbies: ["Reading", "Gaming"],
+  maritalStatus: "Single",
+  nationality: "American",
+  height: "5ft 9in",
+  weight: "70kg",
+  city: "Los Angeles", 
+  bloodType: "O+",
+  languages: ["English", "Spanish"],
+  salary: "100k USD",
+  education: "Master's",
+};
+
+const { city } = person;
+
+console.log(city); 
+
+
+ways
+
+const {username,email} = {name:"khushi",age:34}
+console.log(username);
+
+
+const user = {
+  username: "john_doe",
+  email: "john@example.com",
+};
+
+// Using alias (custom variable names)
+const { username: userName, email: userEmail } = user;
+
+console.log(userName, userEmail); // john_doe john@example.com
+----------------------------------------------------
+
+🎯 1. Spread Operator (...)
+The spread operator is used to expand or spread the elements of an array or object into individual items or properties. It’s usually used in array and object literals, function calls, or copying elements.
