@@ -126,57 +126,57 @@
 
 // // -----------------------------practice time -----------------------
 
-// // create a custom error if the user write the age in negative throw the error
-// // Q: Write a function that divides two numbers and throws an error if the divisor is zero.
-// // Explain the finally block and provide an example of its use.
-// // What is the difference between throw and return statements?
-// // Write a try-catch block to handle errors asynchronously using async/await.
-// // throw a error after 2 sec of the page reloading
+// create a custom error if the user write the age in negative throw the error
+// Q: Write a function that divides two numbers and throws an error if the divisor is zero.
+// Explain the finally block and provide an example of its use.
+// What is the difference between throw and return statements?
+// Write a try-catch block to handle errors asynchronously using async/await.
+// throw a error after 2 sec of the page reloading
 
 
-// // try {
-// //   let age = -4;
-// //   if (age < 0) {
-// //     throw new Error("age is not able to take in negative value");
-// //   }
-// //   else {
-// //     console.log("its okay");
-// //   }
-// // } catch (err) {
-// //   console.log(err.message);
+// try {
+//   let age = -4;
+//   if (age < 0) {
+//     throw new Error("age is not able to take in negative value");
+//   }
+//   else {
+//     console.log("its okay");
+//   }
+// } catch (err) {
+//   console.log(err.message);
 
-// // }
-// // console.log("jeeeyyy");
+// }
+// console.log("jeeeyyy");
 
-// // Q: Write a function that divides two numbers and throws an error if the divisor is zero.
+// Q: Write a function that divides two numbers and throws an error if the divisor is zero.
 
-// // function abcd(a, b) {
-// //   if (b === 0) {
-// //     throw new Error("this is not valid way")
-// //   }
-// //   return a/b;
-// // }
-// // try {
-// //   console.log(abcd(10, 0));
+// function abcd(a, b) {
+//   if (b === 0) {
+//     throw new Error("this is not valid way")
+//   }
+//   return a/b;
+// }
+// try {
+//   console.log(abcd(10, 0));
 
-// // } catch (err) {
-// //   console.log(err.message);
+// } catch (err) {
+//   console.log(err.message);
 
-// // }
-// // finally{
-// //   console.log("heyyyy");
+// }
+// finally{
+//   console.log("heyyyy");
 
-// // }
+// }
 
-// // throw a error after 2 sec of the page reloading
-// // try {
-// //   setTimeout(() => {
-// //     throw new Error("error h boss")
-// //   }, 2000)
-// // }catch(err) {
-// //   console.log(err.message);
+// throw a error after 2 sec of the page reloading
+// try {
+//   setTimeout(() => {
+//     throw new Error("error h boss")
+//   }, 2000)
+// }catch(err) {
+//   console.log(err.message);
 
-// // }
+// }
 
 // // if(!res.ok){
 
